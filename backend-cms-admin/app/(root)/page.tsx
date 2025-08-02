@@ -1,6 +1,6 @@
 "use client";
 
-import ClerkAuth from "../(auth)/clerk/page";
+import ClerkAuth from "../(auth)/userProfile/page";
 import { useStoreModal } from "@/hooks/useStoreModal";
 import { useEffect } from "react";
 
