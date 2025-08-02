@@ -8,8 +8,7 @@ import {
 
 export default function ClerkAuth() {
   return (
-    <header className="flex justify-between text-white border items-center p-4 m-0 gap-4 h-16 bg-blue-500">
-      <nav>hello dashboard ji</nav>
+    <>
       <SignedOut>
         <SignInButton />
         <SignUpButton>
@@ -21,6 +20,6 @@ export default function ClerkAuth() {
       <SignedIn>
         <UserButton />
       </SignedIn>
-    </header>
+    </>
   );
 }
