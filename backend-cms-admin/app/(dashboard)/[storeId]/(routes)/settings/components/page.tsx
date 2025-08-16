@@ -16,7 +16,7 @@ import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { useOrigin } from "@/hooks/use-origin";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { store } from "@prisma/client";
+import { Store } from "@prisma/client";
 import axios from "axios";
 import { Trash } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
@@ -26,7 +26,7 @@ import toast from "react-hot-toast";
 import * as z from "zod";
 
 interface SettingFormProps {
-  initialData: store;
+  initialData: Store;
 }
 
 const formSchema = z.object({
