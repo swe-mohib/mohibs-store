@@ -45,7 +45,7 @@ export async function PATCH(
     const { label, imageUrl } = body;
 
     if (!userId) {
-      return new NextResponse("Unauthenticated"), { status: 401 };
+      return new NextResponse("Unauthenticated", { status: 401 });
     }
     if (!label || !imageUrl) {
       return new NextResponse("Missing label or image-url"), { status: 401 };
@@ -97,7 +97,7 @@ export async function DELETE(
     const { userId } = await auth();
 
     if (!userId) {
-      return new NextResponse("Unauthenticated"), { status: 401 };
+      return new NextResponse("Unauthenticated", { status: 401 });
     }
     if (!storeId || !billboardId) {
       return new NextResponse("Missing storeId or billboardId", {

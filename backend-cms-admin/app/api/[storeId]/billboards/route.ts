@@ -13,7 +13,7 @@ export async function POST(
     const { label, imageUrl } = body;
 
     if (!userId) {
-      return new NextResponse("Unauthenticated"), { status: 401 };
+      return new NextResponse("Unauthenticated", { status: 401 });
     }
     if (!label || !imageUrl) {
       return new NextResponse("Missing label or image-url"), { status: 401 };
