@@ -4,31 +4,31 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   req: Request,
-  { params }: { params: { categoryId: string } }
+  { params }: { params: { colorId: string } }
 ) {
   try {
-    const { categoryId } = await params;
+    const { colorId } = await params;
 
-    if (!categoryId) {
-      return new NextResponse("Missing categoryId", {
+    if (!colorId) {
+      return new NextResponse("Missing colorId", {
         status: 400,
       });
     }
 
-    const category = await prismadb.category.findUnique({
+    const color = await prismadb.color.findUnique({
       where: {
-        id: categoryId,
+        id: colorId,
       },
     });
 
-    return new NextResponse(JSON.stringify(category), {
+    return new NextResponse(JSON.stringify(color), {
       status: 200,
       headers: {
         "Content-Type": "application/json",
       },
     });
   } catch (error) {
-    console.log("[CATEGORIES_GET]", error);
+    console.log("[COLORS_GET]", error);
 
     return new NextResponse("Internal Server Error", { status: 500 });
   }
@@ -36,22 +36,22 @@ export async function GET(
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { storeId: string; categoryId: string } }
+  { params }: { params: { storeId: string; colorId: string } }
 ) {
   try {
-    const { storeId, categoryId } = await params;
+    const { storeId, colorId } = await params;
     const { userId } = await auth();
     const body = await req.json();
-    const { name, billboardId } = body;
+    const { name, value } = body;
 
     if (!userId) {
       return new NextResponse("Unauthenticated", { status: 401 });
     }
-    if (!name || !billboardId) {
-      return new NextResponse("Missing name or billboardId"), { status: 401 };
+    if (!name || !value) {
+      return new NextResponse("Missing name or value", { status: 401 });
     }
-    if (!storeId || !categoryId) {
-      return new NextResponse("Missing storeId or categoryId", {
+    if (!storeId || !colorId) {
+      return new NextResponse("Missing storeId or colorId", {
         status: 400,
       });
     }
@@ -65,24 +65,24 @@ export async function PATCH(
     if (!storeByUserId) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
-    const category = await prismadb.category.updateMany({
+    const color = await prismadb.color.updateMany({
       where: {
-        id: categoryId,
+        id: colorId,
       },
       data: {
         name,
-        billboardId,
+        value,
       },
     });
 
-    return new NextResponse(JSON.stringify(category), {
+    return new NextResponse(JSON.stringify(color), {
       status: 200,
       headers: {
         "Content-Type": "application/json",
       },
     });
   } catch (error) {
-    console.log("[CATEGORIES_PATCH]", error);
+    console.log("[COLORS_PATCH]", error);
 
     return new NextResponse("Internal Server Error", { status: 500 });
   }
@@ -90,17 +90,17 @@ export async function PATCH(
 
 export async function DELETE(
   req: Request,
-  { params }: { params: { storeId: string; categoryId: string } }
+  { params }: { params: { storeId: string; colorId: string } }
 ) {
   try {
-    const { storeId, categoryId } = await params;
+    const { storeId, colorId } = await params;
     const { userId } = await auth();
 
     if (!userId) {
       return new NextResponse("Unauthenticated", { status: 401 });
     }
-    if (!storeId || !categoryId) {
-      return new NextResponse("Missing storeId or categoryId", {
+    if (!storeId || !colorId) {
+      return new NextResponse("Missing storeId or colorId", {
         status: 400,
       });
     }
@@ -114,20 +114,20 @@ export async function DELETE(
     if (!storeByUserId) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
-    const category = await prismadb.category.deleteMany({
+    const color = await prismadb.color.deleteMany({
       where: {
-        id: categoryId,
+        id: colorId,
       },
     });
 
-    return new NextResponse(JSON.stringify(category), {
+    return new NextResponse(JSON.stringify(color), {
       status: 200,
       headers: {
         "Content-Type": "application/json",
       },
     });
   } catch (error) {
-    console.log("[CATEGORIES_DELETE]", error);
+    console.log("[COLORS_DELETE]", error);
 
     return new NextResponse("Internal Server Error", { status: 500 });
   }

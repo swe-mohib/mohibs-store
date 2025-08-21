@@ -1,7 +1,7 @@
 "use client";
 
 import { Copy, Edit, MoreHorizontal, Trash } from "lucide-react";
-import { SizeColumn } from "./columns";
+import { ColorColumn } from "./columns";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,7 +18,7 @@ import { useParams, useRouter } from "next/navigation";
 import { AlertModal } from "@/components/modals/alertModal";
 
 interface CellActionProps {
-  data: SizeColumn;
+  data: ColorColumn;
 }
 
 const CellAction: React.FC<CellActionProps> = ({ data }) => {
@@ -30,21 +30,21 @@ const CellAction: React.FC<CellActionProps> = ({ data }) => {
 
   const onCopy = () => {
     navigator.clipboard.writeText(data.id);
-    toast.success("Size Id copied to clipboard.");
+    toast.success("Color Id copied to clipboard.");
   };
 
   const onUpdate = () => {
-    router.push(`/${params.storeId}/sizes/${data.id}`);
+    router.push(`/${params.storeId}/colors/${data.id}`);
   };
 
   const onDelete = async () => {
     try {
       setLoading(true);
-      await axios.delete(`/api/${params.storeId}/sizes/${data.id}`);
+      await axios.delete(`/api/${params.storeId}/colors/${data.id}`);
       router.refresh();
-      toast.success("Size deleted.");
+      toast.success("Color deleted.");
     } catch (error) {
-      toast.error("Make sure you removed all products from this size.");
+      toast.error("Make sure you removed all products from this color.");
     } finally {
       setLoading(false);
       setOpen(false);
