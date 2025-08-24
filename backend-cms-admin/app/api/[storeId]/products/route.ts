@@ -84,26 +84,46 @@ export async function GET(
   try {
     const { storeId } = await params;
 
+    const { searchParams } = new URL(req.url);
+    const categoryId = searchParams.get("categoryId") || undefined;
+    const colorId = searchParams.get("colorId") || undefined;
+    const sizeId = searchParams.get("sizeId") || undefined;
+    const isFeatured = searchParams.get("isFeatured") || undefined;
+
     if (!storeId) {
       return new NextResponse("Missing storeId", {
         status: 400,
       });
     }
 
-    const billboards = await prismadb.billboard.findMany({
+    const products = await prismadb.product.findMany({
       where: {
         storeId,
+        colorId,
+        categoryId,
+        sizeId,
+        isFeatured: isFeatured ? true : undefined,
+        isArchived: false,
+      },
+      include: {
+        images: true,
+        category: true,
+        size: true,
+        color: true,
+      },
+      orderBy: {
+        createdAt: "desc",
       },
     });
 
-    return new NextResponse(JSON.stringify(billboards), {
+    return new NextResponse(JSON.stringify(products), {
       status: 200,
       headers: {
         "Content-Type": "application/json",
       },
     });
   } catch (error) {
-    console.log("[BILLBOARDS_GET]", error);
+    console.log("[PRODUCTS_GET]", error);
 
     return new NextResponse("Internal Server Error", { status: 500 });
   }

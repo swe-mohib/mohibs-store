@@ -82,7 +82,7 @@ export async function PATCH(
       },
     });
   } catch (error) {
-    console.log("[BILLBOARDS_POST]", error);
+    console.log("[BILLBOARDS_PATCH]", error);
 
     return new NextResponse("Internal Server Error", { status: 500 });
   }
