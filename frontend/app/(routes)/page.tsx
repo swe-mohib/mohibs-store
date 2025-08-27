@@ -1,11 +1,17 @@
-import React from "react";
+import getBillboard from "@/actions/get-billboard";
+import Billboard from "@/components/billboard";
+import Container from "@/components/ui/container";
 
-function HomePage() {
+const HomePage = async () => {
+  const res = await getBillboard("");
+  const response = Array.isArray(res) ? res[0] : res;
   return (
-    <div>
-      <h1>HOMEPAGE</h1>
-    </div>
+    <Container>
+      <div className="space-y-10 pb-10">
+        <Billboard data={response} />
+      </div>
+    </Container>
   );
-}
+};
 
 export default HomePage;
