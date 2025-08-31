@@ -15,8 +15,8 @@ export interface Product {
   name: string;
   price: string;
   category: Category;
-  size: Size[];
-  color: Color[];
+  size: Size;
+  color: Color;
   images: Image[];
 }
 
