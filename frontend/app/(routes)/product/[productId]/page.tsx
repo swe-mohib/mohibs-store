@@ -26,9 +26,9 @@ const ProductPage: React.FC<ProductPageProps> = async ({ params }) => {
     <div className="bg-white">
       <Container>
         <div className="px-4 py-10 sm:px-6 lg:px-8">
-          <div className="md:grid md:grid-cols-2 md:items-start md:gap-x-8">
+          <div className="sm:grid sm:grid-cols-2 sm:items-start sm:gap-x-8  lg:grid-cols-3">
             <Gallery images={product.images} />
-            <div className="mt-10 md:mt-0">
+            <div className="mt-10 sm:mt-0 lg:col-span-2">
               <Info data={product} />
             </div>
           </div>
