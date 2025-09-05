@@ -32,8 +32,6 @@ const CategoryPage: React.FC<CategoryPageProps> = async ({
   const colors = await getColors();
   const sizes = await getSize();
 
-  console.log(colors);
-
   return (
     <div className="bg-white">
       <Container>
