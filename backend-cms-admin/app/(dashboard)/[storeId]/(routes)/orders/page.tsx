@@ -24,8 +24,8 @@ const BillboardsPage = async ({ params }: { params: { storeId: string } }) => {
 
   const formattedOrders: OrderColumn[] = orders.map((order) => ({
     id: order.id,
-    phone: order.phone,
-    address: order.address,
+    razorpay_order_id: order.razorpay_order_id,
+    razorpay_payment_id: order.razorpay_payment_id,
     isPaid: order.isPaid,
     products: order.orderItems
       .map((orderItem) => orderItem.product.name)
@@ -36,7 +36,6 @@ const BillboardsPage = async ({ params }: { params: { storeId: string } }) => {
       }, 0)
     ),
     createdAt: format(order.createdAt, "MMMM do, yyyy"),
-    updatedAt: format(order.updatedAt, "MMMM do, yyyy"),
   }));
 
   return (
