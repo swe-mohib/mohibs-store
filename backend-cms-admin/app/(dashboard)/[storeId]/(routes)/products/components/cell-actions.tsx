@@ -44,7 +44,8 @@ const CellAction: React.FC<CellActionProps> = ({ data }) => {
       router.refresh();
       toast.success("Product deleted.");
     } catch (error) {
-      toast.error("Error while deleting products.");
+      const errorMessage = error instanceof Error ? error.message : "";
+      toast.error("Error while deleting products." + " " + errorMessage);
     } finally {
       setLoading(false);
       setOpen(false);

@@ -115,7 +115,9 @@ const ProductForm: React.FC<ProductFormProps> = ({
       router.push(`/${params.storeId}/products`);
       toast.success(toastMessage);
     } catch (error) {
-      toast.error("Something went wrong.");
+      const errorMessage =
+        error instanceof Error ? error.message : "Something went wrong.";
+      toast.error(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -128,7 +130,9 @@ const ProductForm: React.FC<ProductFormProps> = ({
       router.push(`/${params.storeId}/products`);
       toast.success("Product deleted.");
     } catch (error) {
-      toast.error("Something went wrong.");
+      const errorMessage =
+        error instanceof Error ? error.message : "Something went wrong.";
+      toast.error(errorMessage);
     } finally {
       setLoading(false);
       setOpen(false);

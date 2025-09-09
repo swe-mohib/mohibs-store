@@ -44,7 +44,12 @@ const CellAction: React.FC<CellActionProps> = ({ data }) => {
       router.refresh();
       toast.success("Size deleted.");
     } catch (error) {
-      toast.error("Make sure you removed all products from this size.");
+      const errorMessage = error instanceof Error ? error.message : "";
+      toast.error(
+        "Make sure you removed all products from this size." +
+          " " +
+          errorMessage
+      );
     } finally {
       setLoading(false);
       setOpen(false);

@@ -44,7 +44,12 @@ const CellAction: React.FC<CellActionProps> = ({ data }) => {
       router.refresh();
       toast.success("Billboard deleted.");
     } catch (error) {
-      toast.error("Make sure you removed all categories from this billboard.");
+      const errorMessage = error instanceof Error ? error.message : "";
+      toast.error(
+        "Make sure you removed all categories from this billboard." +
+          " " +
+          errorMessage
+      );
     } finally {
       setLoading(false);
       setOpen(false);

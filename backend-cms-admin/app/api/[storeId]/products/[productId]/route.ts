@@ -85,11 +85,6 @@ export async function PATCH(
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
-    const allProductImages = await prismadb.product.findMany({
-      where: {
-        id: productId,
-      },
-    });
     const product = await prismadb.product.update({
       where: {
         id: productId,

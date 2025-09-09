@@ -11,7 +11,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Heading } from "@/components/ui/heading";
-import ImageUpload from "@/components/ui/image-upload";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -71,7 +70,9 @@ const SizeForm: React.FC<SizeFormProps> = ({ initialData }) => {
       router.push(`/${params.storeId}/sizes`);
       toast.success(toastMessage);
     } catch (error) {
-      toast.error("Something went wrong.");
+      const errorMessage =
+        error instanceof Error ? error.message : "Something went wrong.";
+      toast.error(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -84,7 +85,12 @@ const SizeForm: React.FC<SizeFormProps> = ({ initialData }) => {
       router.push(`/${params.storeId}/sizes`);
       toast.success("Size deleted.");
     } catch (error) {
-      toast.error("Make sure you removed all products from this size.");
+      const errorMessage = error instanceof Error ? error.message : "";
+      toast.error(
+        "Make sure you removed all products from this size." +
+          " " +
+          errorMessage
+      );
     } finally {
       setLoading(false);
       setOpen(false);
