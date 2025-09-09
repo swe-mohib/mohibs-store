@@ -10,13 +10,13 @@ import getSize from "@/actions/get-sizes";
 import { MobileFilters } from "./components/mobile-filters";
 
 interface CategoryPageProps {
-  params: {
+  params: Promise<{
     categoryId: string;
-  };
-  searchParams: {
+  }>;
+  searchParams: Promise<{
     colorId: string;
     sizeId: string;
-  };
+  }>;
 }
 
 const CategoryPage: React.FC<CategoryPageProps> = async ({
