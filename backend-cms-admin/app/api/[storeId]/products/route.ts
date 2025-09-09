@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(
   req: Request,
-  { params }: { params: { storeId: string } }
+  { params }: { params: Promise<{ storeId: string }> }
 ) {
   try {
     const { storeId } = await params;
@@ -28,13 +28,12 @@ export async function POST(
       return new NextResponse("Missing storeId", { status: 400 });
     }
     if (!name || !price || !categoryId || !colorId || !sizeId) {
-      return new NextResponse("Fill all required fields."), { status: 401 };
+      return new NextResponse("Fill all required fields.", { status: 401 });
     }
     if (!images || !images.length) {
-      return (
-        new NextResponse("Atleast one product image are required."),
-        { status: 401 }
-      );
+      return new NextResponse("Atleast one product image are required.", {
+        status: 401,
+      });
     }
 
     const storeByUserId = await prismadb.store.findFirst({
@@ -79,7 +78,7 @@ export async function POST(
 
 export async function GET(
   req: Request,
-  { params }: { params: { storeId: string } }
+  { params }: { params: Promise<{ storeId: string }> }
 ) {
   try {
     const { storeId } = await params;

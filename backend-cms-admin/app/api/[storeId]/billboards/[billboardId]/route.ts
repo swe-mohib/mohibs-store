@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   req: Request,
-  { params }: { params: { billboardId: string } }
+  { params }: { params: Promise<{ billboardId: string }> }
 ) {
   try {
     const { billboardId } = await params;
@@ -36,7 +36,7 @@ export async function GET(
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { storeId: string; billboardId: string } }
+  { params }: { params: Promise<{ storeId: string; billboardId: string }> }
 ) {
   try {
     const { storeId, billboardId } = await params;
@@ -48,7 +48,7 @@ export async function PATCH(
       return new NextResponse("Unauthenticated", { status: 401 });
     }
     if (!label || !imageUrl) {
-      return new NextResponse("Missing label or image-url"), { status: 401 };
+      return new NextResponse("Missing label or image-url", { status: 401 });
     }
     if (!storeId || !billboardId) {
       return new NextResponse("Missing storeId or billboardId", {
@@ -90,7 +90,7 @@ export async function PATCH(
 
 export async function DELETE(
   req: Request,
-  { params }: { params: { storeId: string; billboardId: string } }
+  { params }: { params: Promise<{ storeId: string; billboardId: string }> }
 ) {
   try {
     const { storeId, billboardId } = await params;

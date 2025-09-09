@@ -4,10 +4,10 @@ import ProductForm from "./components/product-from";
 const ProductPage = async ({
   params,
 }: {
-  params: {
+  params: Promise<{
     productId: string;
     storeId: string;
-  };
+  }>;
 }) => {
   const { productId, storeId } = await params;
   const product = await prismadb.product.findUnique({

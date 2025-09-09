@@ -33,9 +33,9 @@ export async function POST(
   {
     params,
   }: {
-    params: {
+    params: Promise<{
       storeId: string;
-    };
+    }>;
   }
 ) {
   try {

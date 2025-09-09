@@ -10,9 +10,9 @@ import { formatter } from "@/lib/utils";
 import { CreditCard, IndianRupee, Package } from "lucide-react";
 
 interface DashboardPageProps {
-  params: {
+  params: Promise<{
     storeId: string;
-  };
+  }>;
 }
 
 const DashboardPage: React.FC<DashboardPageProps> = async ({ params }) => {

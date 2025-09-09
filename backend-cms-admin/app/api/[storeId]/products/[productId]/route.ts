@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   req: Request,
-  { params }: { params: { productId: string } }
+  { params }: { params: Promise<{ productId: string }> }
 ) {
   try {
     const { productId } = await params;
@@ -42,7 +42,7 @@ export async function GET(
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { storeId: string; productId: string } }
+  { params }: { params: Promise<{ storeId: string; productId: string }> }
 ) {
   try {
     const { storeId, productId } = await params;
@@ -66,13 +66,12 @@ export async function PATCH(
       return new NextResponse("Missing storeId", { status: 400 });
     }
     if (!name || !price || !categoryId || !colorId || !sizeId) {
-      return new NextResponse("Fill all required fields."), { status: 401 };
+      return new NextResponse("Fill all required fields.", { status: 401 });
     }
     if (!images || !images.length) {
-      return (
-        new NextResponse("Atleast one product image are required."),
-        { status: 401 }
-      );
+      return new NextResponse("Atleast one product image are required.", {
+        status: 401,
+      });
     }
 
     const storeByUserId = await prismadb.store.findFirst({
@@ -122,7 +121,7 @@ export async function PATCH(
 
 export async function DELETE(
   req: Request,
-  { params }: { params: { storeId: string; productId: string } }
+  { params }: { params: Promise<{ storeId: string; productId: string }> }
 ) {
   try {
     const { storeId, productId } = await params;

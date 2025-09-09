@@ -1,12 +1,12 @@
 import prismadb from "@/lib/prismadb";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
-import { SettingForm } from "./components/page";
+import { SettingForm } from "./components/setting-form";
 
 interface SettingsPageProps {
-  params: {
+  params: Promise<{
     storeId: string;
-  };
+  }>;
 }
 
 const SettingsPage: React.FC<SettingsPageProps> = async ({ params }) => {
