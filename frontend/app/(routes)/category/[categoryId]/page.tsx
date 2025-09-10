@@ -9,6 +9,8 @@ import getColors from "@/actions/get-colors";
 import getSize from "@/actions/get-sizes";
 import { MobileFilters } from "./components/mobile-filters";
 
+export const revalidate = 0;
+
 interface CategoryPageProps {
   params: Promise<{
     categoryId: string;
