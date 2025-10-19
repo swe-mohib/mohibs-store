@@ -145,6 +145,19 @@ export async function DELETE(
     if (!storeByUserId) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
+
+    const productSaleRecord = await prismadb.orderItem.findMany({
+      where: {
+        productId,
+      },
+    });
+
+    if (productSaleRecord.length !== 0) {
+      return new NextResponse(
+        "This product can not be deleted, beacuse it has sale record. Still you can archive it.",
+        { status: 400 }
+      );
+    }
     const product = await prismadb.product.deleteMany({
       where: {
         id: productId,

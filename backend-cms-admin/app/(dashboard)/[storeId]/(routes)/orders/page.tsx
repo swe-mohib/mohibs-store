@@ -4,7 +4,7 @@ import { OrderColumn } from "./components/columns";
 import { format } from "date-fns";
 import { formatter } from "@/lib/utils";
 
-const BillboardsPage = async ({
+const OrdersPage = async ({
   params,
 }: {
   params: Promise<{ storeId: string }>;
@@ -51,4 +51,4 @@ const BillboardsPage = async ({
   );
 };
 
-export default BillboardsPage;
+export default OrdersPage;
