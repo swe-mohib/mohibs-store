@@ -6,7 +6,7 @@ import { Heading } from "@/components/ui/heading";
 const Loading = () => {
   return (
     <div className="flex-col">
-      <div className="flex-1 space-y-4 p-8 pt-6">
+      <div className="flex-1 space-y-4 p-4 sm:p-6 lg:p-8 lg:pt-6">
         {/* Page heading */}
         <Heading title="Settings" description="Loading store settings..." />
         <Separator />

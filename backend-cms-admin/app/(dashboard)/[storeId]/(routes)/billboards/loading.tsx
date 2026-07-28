@@ -6,13 +6,13 @@ import { Heading } from "@/components/ui/heading";
 const Loading = () => {
   return (
     <div className="flex-col">
-      <div className="flex-1 space-y-4 p-8 pt-6">
+      <div className="flex-1 space-y-4 p-4 sm:p-6 lg:p-8 lg:pt-6">
         {/* Page heading */}
         <Heading title="Billboards" description="Loading billboards..." />
         <Separator />
 
         {/* Toolbar area (e.g., Add Billboard button, filters) */}
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <Skeleton className="h-10 w-32 rounded-md" />
           <Skeleton className="h-10 w-24 rounded-md" />
         </div>
@@ -29,7 +29,7 @@ const Loading = () => {
               {[...Array(5)].map((_, i) => (
                 <div
                   key={i}
-                  className="grid grid-cols-3 items-center gap-4 border-b py-3 last:border-0"
+                  className="grid gap-3 border-b py-3 last:border-0 sm:grid-cols-3 sm:items-center sm:gap-4"
                 >
                   <Skeleton className="h-4 w-40" />
                   <Skeleton className="h-4 w-32" />
