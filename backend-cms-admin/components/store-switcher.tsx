@@ -49,7 +49,7 @@ export default function StoreSwitcher({
   }));
 
   const currentStore = formattedItems.find(
-    (item) => item.value === params.storeId
+    (item) => item.value === params.storeId,
   );
 
   const [open, setOpen] = useState(false);
@@ -67,10 +67,10 @@ export default function StoreSwitcher({
           role="combobox"
           aria-expanded={open}
           area-lable="Select a store"
-          className={cn("w-[200px] justify-between", className)}
+          className={cn("w-36 justify-between sm:w-[200px]", className)}
         >
           <StoreIcon className="mr-2 h-4 w-4" />
-          {currentStore?.label}
+          <span className="truncate">{currentStore?.label}</span>
           <ChevronsUpDown className="ml-auto h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -86,7 +86,7 @@ export default function StoreSwitcher({
                   onSelect={() => onStoreSelect(store)}
                   className={cn(
                     "text-sm",
-                    currentStore?.value === store.value ? "bg-accent" : ""
+                    currentStore?.value === store.value ? "bg-accent" : "",
                   )}
                 >
                   <StoreIcon className="mr-2 h-4 w-4" />
@@ -96,7 +96,7 @@ export default function StoreSwitcher({
                       "ml-auto h-4 w-4",
                       currentStore?.value === store.value
                         ? "opacity-100"
-                        : "opacity-0"
+                        : "opacity-0",
                     )}
                   />
                 </CommandItem>

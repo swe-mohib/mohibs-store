@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   req: Request,
-  { params }: { params: Promise<{ productId: string }> }
+  { params }: { params: Promise<{ productId: string }> },
 ) {
   try {
     const { productId } = await params;
@@ -42,7 +42,7 @@ export async function GET(
 
 export async function PATCH(
   req: Request,
-  { params }: { params: Promise<{ storeId: string; productId: string }> }
+  { params }: { params: Promise<{ storeId: string; productId: string }> },
 ) {
   try {
     const { storeId, productId } = await params;
@@ -121,7 +121,7 @@ export async function PATCH(
 
 export async function DELETE(
   req: Request,
-  { params }: { params: Promise<{ storeId: string; productId: string }> }
+  { params }: { params: Promise<{ storeId: string; productId: string }> },
 ) {
   try {
     const { storeId, productId } = await params;
@@ -155,7 +155,7 @@ export async function DELETE(
     if (productSaleRecord.length !== 0) {
       return new NextResponse(
         "This product can not be deleted, beacuse it has sale record. Still you can archive it.",
-        { status: 400 }
+        { status: 400 },
       );
     }
     const product = await prismadb.product.deleteMany({

@@ -10,7 +10,7 @@ export async function POST(
     params: Promise<{
       storeId: string;
     }>;
-  }
+  },
 ) {
   try {
     const { storeId } = await params;
@@ -66,7 +66,7 @@ export async function GET(
     params: Promise<{
       storeId: string;
     }>;
-  }
+  },
 ) {
   try {
     const { storeId } = await params;

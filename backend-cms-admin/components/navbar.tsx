@@ -19,10 +19,10 @@ export default async function Navbar() {
   });
   return (
     <div className="border-b">
-      <div className="flex h-16 items-center px-4">
+      <div className="flex min-h-16 flex-wrap items-center gap-y-2 px-4 py-2 sm:flex-nowrap">
         <StoreSwitcher items={stores} />
-        <MainNav className="mx-6" />
-        <div className="ml-auto flex items-center space-x-4">
+        <MainNav className="order-3 w-full sm:order-none sm:mx-6 sm:w-auto" />
+        <div className="ml-auto flex shrink-0 items-center space-x-4">
           <ThemeToggle />
           <UserButton />
         </div>

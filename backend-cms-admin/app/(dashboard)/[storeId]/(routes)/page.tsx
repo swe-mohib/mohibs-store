@@ -24,10 +24,10 @@ const DashboardPage: React.FC<DashboardPageProps> = async ({ params }) => {
   const graphRevenue = await getGraphRevenue(storeId);
   return (
     <div className="flex flex-col">
-      <div className="flex-1 space-y-4 p-8 pt-6">
+      <div className="flex-1 space-y-4 p-4 sm:p-6 lg:p-8 lg:pt-6">
         <Heading title="Dashboard" description="Welcome to your dashboard" />
         <Separator />
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
               <CardTitle className="text-sm font-medium">

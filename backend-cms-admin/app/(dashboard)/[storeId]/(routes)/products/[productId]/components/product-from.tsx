@@ -105,7 +105,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
       if (initialData) {
         const res = await axios.patch(
           `/api/${params.storeId}/products/${params.productId}`,
-          payload
+          payload,
         );
         console.log(res);
       } else {
@@ -146,7 +146,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
         onClose={() => setOpen(false)}
         onConfirm={onDelete}
       />
-      <div className="flex items-center justify-between">
+      <div className="flex items-start justify-between gap-4 sm:items-center">
         <Heading title={title} description={description} />
         {initialData && (
           <Button
@@ -183,7 +183,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
                     onRemove={(url) => {
                       const currentImages = form.getValues("images") || [];
                       field.onChange(
-                        currentImages.filter((image) => image.url !== url)
+                        currentImages.filter((image) => image.url !== url),
                       );
                     }}
                   />
@@ -192,7 +192,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
               </FormItem>
             )}
           />
-          <div className="grid grid-cols-3 gap-8">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             <FormField
               control={form.control}
               name="name"
@@ -329,7 +329,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
               )}
             />
           </div>
-          <div className="grid grid-cols-3 gap-8">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             <FormField
               control={form.control}
               name="isFeatured"

@@ -36,7 +36,7 @@ export async function POST(
     params: Promise<{
       storeId: string;
     }>;
-  }
+  },
 ) {
   try {
     const { storeId } = await params;
@@ -74,7 +74,7 @@ export async function POST(
       notes: {
         // keep a small cart snapshot (but rely on your DB for truth)
         cart: JSON.stringify(
-          cartProducts.map((i) => ({ id: i.id, name: i.name }))
+          cartProducts.map((i) => ({ id: i.id, name: i.name })),
         ),
       },
     };

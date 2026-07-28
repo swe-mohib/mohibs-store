@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   req: Request,
-  { params }: { params: Promise<{ categoryId: string }> }
+  { params }: { params: Promise<{ categoryId: string }> },
 ) {
   try {
     const { categoryId } = await params;
@@ -39,7 +39,7 @@ export async function GET(
 
 export async function PATCH(
   req: Request,
-  { params }: { params: Promise<{ storeId: string; categoryId: string }> }
+  { params }: { params: Promise<{ storeId: string; categoryId: string }> },
 ) {
   try {
     const { storeId, categoryId } = await params;
@@ -93,7 +93,7 @@ export async function PATCH(
 
 export async function DELETE(
   req: Request,
-  { params }: { params: Promise<{ storeId: string; categoryId: string }> }
+  { params }: { params: Promise<{ storeId: string; categoryId: string }> },
 ) {
   try {
     const { storeId, categoryId } = await params;

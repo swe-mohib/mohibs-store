@@ -154,7 +154,7 @@ export default function Page() {
         <div className="border-t border-gray-100 px-8 py-5 text-center text-sm text-gray-500">
           Don&apos;t have an account?{" "}
           <Link
-            href="http://localhost:3000/sign-up"
+            href="/sign-up"
             className="font-medium text-gray-900 hover:underline"
           >
             Sign up

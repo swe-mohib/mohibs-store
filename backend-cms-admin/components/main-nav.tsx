@@ -54,7 +54,12 @@ export default function MainNav({
   ];
 
   return (
-    <nav className={cn("flex items-center space-x-4 lg:space-x-6", className)}>
+    <nav
+      className={cn(
+        "flex items-center gap-4 overflow-x-auto pb-1 whitespace-nowrap lg:gap-6",
+        className,
+      )}
+    >
       {routes.map((route) => (
         <Link
           key={route.href}
@@ -63,7 +68,7 @@ export default function MainNav({
             "text-sm font-medium transition-colors hover:text-primary",
             route.active
               ? "text-black dark:text-white"
-              : "text-muted-foreground"
+              : "text-muted-foreground",
           )}
         >
           {route.label}

@@ -64,7 +64,7 @@ const BillboardForm: React.FC<BillboardFormProps> = ({ initialData }) => {
       if (initialData) {
         const res = await axios.patch(
           `/api/${params.storeId}/billboards/${params.billboardId}`,
-          values
+          values,
         );
         console.log(res);
       } else {
@@ -85,7 +85,7 @@ const BillboardForm: React.FC<BillboardFormProps> = ({ initialData }) => {
     try {
       setLoading(true);
       await axios.delete(
-        `/api/${params.storeId}/billboards/${params.billboardId}`
+        `/api/${params.storeId}/billboards/${params.billboardId}`,
       );
       router.refresh();
       router.push(`/${params.storeId}/billboards`);
@@ -95,7 +95,7 @@ const BillboardForm: React.FC<BillboardFormProps> = ({ initialData }) => {
       toast.error(
         "Make sure you removed all categories from this billboard." +
           " " +
-          errorMessage
+          errorMessage,
       );
     } finally {
       setLoading(false);
@@ -110,7 +110,7 @@ const BillboardForm: React.FC<BillboardFormProps> = ({ initialData }) => {
         onClose={() => setOpen(false)}
         onConfirm={onDelete}
       />
-      <div className="flex items-center justify-between">
+      <div className="flex items-start justify-between gap-4 sm:items-center">
         <Heading title={title} description={description} />
         {initialData && (
           <Button

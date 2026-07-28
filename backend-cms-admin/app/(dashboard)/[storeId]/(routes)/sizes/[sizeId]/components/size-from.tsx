@@ -61,7 +61,7 @@ const SizeForm: React.FC<SizeFormProps> = ({ initialData }) => {
       if (initialData) {
         await axios.patch(
           `/api/${params.storeId}/sizes/${params.sizeId}`,
-          values
+          values,
         );
       } else {
         await axios.post(`/api/${params.storeId}/sizes`, values);
@@ -89,7 +89,7 @@ const SizeForm: React.FC<SizeFormProps> = ({ initialData }) => {
       toast.error(
         "Make sure you removed all products from this size." +
           " " +
-          errorMessage
+          errorMessage,
       );
     } finally {
       setLoading(false);
@@ -104,7 +104,7 @@ const SizeForm: React.FC<SizeFormProps> = ({ initialData }) => {
         onClose={() => setOpen(false)}
         onConfirm={onDelete}
       />
-      <div className="flex items-center justify-between">
+      <div className="flex items-start justify-between gap-4 sm:items-center">
         <Heading title={title} description={description} />
         {initialData && (
           <Button
@@ -123,7 +123,7 @@ const SizeForm: React.FC<SizeFormProps> = ({ initialData }) => {
           onSubmit={form.handleSubmit(onSubmit)}
           className="space-y-8 w-full"
         >
-          <div className="grid grid-cols-3 gap-8">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             <FormField
               control={form.control}
               name="name"

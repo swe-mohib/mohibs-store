@@ -48,7 +48,7 @@ const CellAction: React.FC<CellActionProps> = ({ data }) => {
       toast.error(
         "Make sure you removed all products from this categories." +
           " " +
-          errorMessage
+          errorMessage,
       );
     } finally {
       setLoading(false);
