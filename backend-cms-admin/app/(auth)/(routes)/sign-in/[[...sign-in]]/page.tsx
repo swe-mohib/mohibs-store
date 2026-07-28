@@ -9,6 +9,11 @@ import Link from "next/link";
 const DEMO_EMAIL = "admin@gmail.com";
 const DEMO_PASSWORD = "Mohib@2026";
 
+function getErrorMessage(error: unknown, fallback: string) {
+  const clerkError = error as { errors?: { longMessage?: string }[] };
+  return clerkError.errors?.[0]?.longMessage ?? fallback;
+}
+
 export default function Page() {
   const { isLoaded, signIn, setActive } = useSignIn();
   const router = useRouter();
@@ -27,10 +32,8 @@ export default function Page() {
         redirectUrl: "/sso-callback",
         redirectUrlComplete: "/",
       });
-    } catch (err: any) {
-      setError(
-        err?.errors?.[0]?.longMessage ?? "Could not continue with Google.",
-      );
+    } catch (err: unknown) {
+      setError(getErrorMessage(err, "Could not continue with Google."));
     }
   }
 
@@ -54,10 +57,12 @@ export default function Page() {
         console.log(result);
         setError("Additional verification is required for this account.");
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       setError(
-        err?.errors?.[0]?.longMessage ??
+        getErrorMessage(
+          err,
           "Something went wrong signing in. Please try again.",
+        ),
       );
     } finally {
       setIsSubmitting(false);
