@@ -4,6 +4,8 @@ import CartItems from "./components/cart-items";
 import Summary from "./components/summary";
 import Container from "@/components/ui/container";
 
+export const dynamic = "force-dynamic";
+
 const Cart = () => {
   const items = useCart((state) => state.items);
   return (
