@@ -5,6 +5,9 @@ services:
     restart: unless-stopped
     expose:
       - "3000"
+    depends_on:
+      backend-cms-admin:
+        condition: service_healthy
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://localhost:3000/"]
       interval: 30s
