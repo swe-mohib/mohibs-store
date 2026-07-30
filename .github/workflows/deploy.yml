@@ -115,7 +115,7 @@ jobs:
 
             aws ssm get-parameters-by-path --path /prod/backend-cms-admin/ --with-decryption \
               --query "Parameters[*].[Name,Value]" --output text | \
-              awk -F'/' '{print $NF}' > .env.backend-cms-admin
+              awk -F'\t' '{n=split($1,a,"/"); print a[n]"="$2}' > .env.backend-cms-admin
 
             echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
             docker compose pull
