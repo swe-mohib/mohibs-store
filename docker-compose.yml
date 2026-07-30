@@ -1,0 +1,39 @@
+services:
+  frontend:
+    image: docker.io/${DOCKERHUB_USERNAME}/mohibs-frontend:latest
+    container_name: frontend
+    restart: unless-stopped
+    expose:
+      - "3000"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  backend-cms-admin:
+    image: docker.io/${DOCKERHUB_USERNAME}/mohibs-backend-cms-admin:latest
+    container_name: backend-cms-admin
+    restart: unless-stopped
+    env_file: .env.backend-cms-admin
+    expose:
+      - "3000"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+    depends_on:
+      - frontend
+      - backend-cms-admin
