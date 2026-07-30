@@ -2,11 +2,6 @@ import prismadb from "@/lib/prismadb";
 import { Product } from "@prisma/client";
 import Razorpay from "razorpay";
 
-const razorpay = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID,
-  key_secret: process.env.RAZORPAY_KEY_SECRET,
-});
-
 function calculateAmountInPaise(cartProducts: Product[]) {
   if (!Array.isArray(cartProducts)) return 0;
   let totalPaise = 0;
@@ -38,6 +33,10 @@ export async function POST(
     }>;
   },
 ) {
+  const razorpay = new Razorpay({
+    key_id: process.env.RAZORPAY_KEY_ID,
+    key_secret: process.env.RAZORPAY_KEY_SECRET,
+  });
   try {
     const { storeId } = await params;
     const body = await request.json();
