@@ -32,7 +32,7 @@ Production e-commerce platform consisting of a customer-facing storefront and an
                         │      Nginx (reverse        │
                         │      proxy + SSL)          │
                         └──────┬─────────────┬───────┘
-             store.mohibs.in   │             │  api.store.mohibs.in
+             store.mohibs.in   │             │  cms.store.mohibs.in
                         ┌──────▼───────┐ ┌───▼────────────────────┐
                         │  frontend    │ │  backend-cms-admin     │
                         │  (Next.js)   │ │  (Next.js + Prisma)    │
@@ -96,7 +96,7 @@ mohibs-store/
 ### `frontend/.env` (local dev only — never committed)
 
 ```dotenv
-NEXT_PUBLIC_API_URL=https://api.store.mohibs.in
+NEXT_PUBLIC_API_URL=https://cms.store.mohibs.in
 NEXT_PUBLIC_RAZORPAY_KEY_ID=rzp_test_xxxxxxxxxxxx
 ```
 
@@ -162,7 +162,7 @@ Both apps use multi-stage Dockerfiles (`deps` → `builder` → `runner`) produc
 
 ```bash
 docker build \
-  --build-arg NEXT_PUBLIC_API_URL=https://api.store.mohibs.in \
+  --build-arg NEXT_PUBLIC_API_URL=https://cms.store.mohibs.in \
   --build-arg NEXT_PUBLIC_RAZORPAY_KEY_ID=rzp_test_xxxx \
   -t mohibs-frontend ./frontend
 ```
@@ -218,7 +218,7 @@ Defined in `.github/workflows/deploy.yml`. Triggers on push to `main`, or manual
 
 | Variable                                          | Example value                 |
 | ------------------------------------------------- | ----------------------------- |
-| `NEXT_PUBLIC_API_URL`                             | `https://api.store.mohibs.in` |
+| `NEXT_PUBLIC_API_URL`                             | `https://cms.store.mohibs.in` |
 | `NEXT_PUBLIC_RAZORPAY_KEY_ID`                     | `rzp_test_xxxxxxxxxxxx`       |
 | `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`               | `pk_test_xxxxxxxxxxxx`        |
 | `NEXT_PUBLIC_CLERK_SIGN_IN_URL`                   | `/sign-in`                    |
@@ -284,7 +284,7 @@ Create a separate IAM user (e.g. `mohib-admin`) with `AmazonSSMFullAccess`, gene
 Point both subdomains (A records) at the EC2 instance's public IP:
 
 - `store.mohibs.in` → EC2 IP
-- `api.store.mohibs.in` → EC2 IP
+- `cms.store.mohibs.in` → EC2 IP
 
 ## Deployment
 
@@ -309,7 +309,7 @@ sudo apt install -y certbot
 
 cd ~/app
 docker compose stop nginx
-sudo certbot certonly --standalone -d store.mohibs.in -d api.store.mohibs.in
+sudo certbot certonly --standalone -d store.mohibs.in -d cms.store.mohibs.in
 ```
 
 `nginx/default.conf` includes an HTTP→HTTPS redirect and SSL server blocks for both domains, referencing:
@@ -392,7 +392,7 @@ docker compose restart backend-cms-admin
 | `sh: prisma: not found`                                                    | `node_modules/.bin` wasn't copied into the runner stage                                                                | Copy `.bin`, or better, copy the full `node_modules`                                              |
 | `Cannot find module 'effect'`                                              | Cherry-picked `node_modules` subfolders miss Prisma CLI's transitive deps                                              | Copy the entire `node_modules` from the builder stage instead of individual folders               |
 | `.env` parse error: unexpected character `?`                               | `awk -F'/'` splits the whole line (including the value) by `/`, corrupting URLs                                        | Split only on tab for columns, and only split the name column by `/`                              |
-| 502 Bad Gateway on `api.store.mohibs.in`                                   | `backend-cms-admin` container isn't healthy/running                                                                    | `docker logs backend-cms-admin --tail 50` to diagnose                                             |
+| 502 Bad Gateway on `cms.store.mohibs.in`                                   | `backend-cms-admin` container isn't healthy/running                                                                    | `docker logs backend-cms-admin --tail 50` to diagnose                                             |
 
 ## Manual Operations Cheat Sheet
 
@@ -421,5 +421,5 @@ sudo certbot certificates
 
 # Verify both domains are live
 curl -I https://store.mohibs.in
-curl -I https://api.store.mohibs.in
+curl -I https://cms.store.mohibs.in
 ```
